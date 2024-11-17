@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, IconButton, Input, TextField, Tooltip } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Menu() {
     return (
@@ -16,8 +17,13 @@ export default function Menu() {
                 <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
 				    <img src='/apae.png' style={{ width: '90px', height: '90px', display: 'block', margin: '10px 10px' }} alt='Logo'></img>
                     <div className="options" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                        <Tooltip title="Página inicial">
+                            <IconButton aria-label="menu" size="large" href="./menu">
+                                <HomeIcon fontSize="inherit" sx={{color:'#000000'}}></HomeIcon>
+                            </IconButton>
+                        </Tooltip>
                         <Tooltip title="Profissionais">
-                            <IconButton aria-label="professionals" size="large" href="">
+                            <IconButton aria-label="professionals" size="large" href="./professionals/professionals">
                                 <GroupsIcon fontSize="inherit" sx={{color:'#000000'}}></GroupsIcon>
                             </IconButton>
                         </Tooltip>
@@ -49,7 +55,7 @@ const cardProfessionals = (
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>                
                 <Typography variant='h5'>Veja uma lista de profissionais e suas agendas para planejar as próximas consultas conforme sua disponibilidade</Typography>
                 <Tooltip title="Veja os Profissionais">
-                    <IconButton aria-label="viewProfessionals" size="large" href="" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                    <IconButton aria-label="viewProfessionals" size="large" href="./professionals/professionals" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
                         <VisibilityIcon fontSize="inherit" sx={{color:'#000000'}}></VisibilityIcon>
                     </IconButton>
                 </Tooltip>
