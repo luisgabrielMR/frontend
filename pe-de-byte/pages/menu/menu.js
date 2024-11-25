@@ -28,7 +28,7 @@ export default function Menu() {
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Alunos">
-                            <IconButton aria-label="students" size="large" href="">
+                            <IconButton aria-label="students" size="large" href="./students/students">
                                 <PersonIcon fontSize="inherit" sx={{color:'#000000'}}></PersonIcon>
                             </IconButton>
                         </Tooltip>
@@ -70,7 +70,7 @@ const cardStudents = (
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>                
                 <Typography variant='h5'>Confira os atendimentos pelas agendas dos alunos para planejar suas próximas consultas</Typography>
                 <Tooltip title="Veja os Alunos">
-                    <IconButton aria-label="viewStudents" size="large" href="" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                    <IconButton aria-label="viewStudents" size="large" href="./students/students" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
                         <VisibilityIcon fontSize="inherit" sx={{color:'#000000'}}></VisibilityIcon>
                     </IconButton>
                 </Tooltip>

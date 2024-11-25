@@ -1,4 +1,4 @@
-import { Box, Button, TextField, MenuItem, Autocomplete, InputAdornment } from "@mui/material";
+import { Box, Button, TextField, MenuItem, Autocomplete, InputAdornment, Select } from "@mui/material";
 import React from 'react';
 import InputMask from 'react-input-mask';
 import Typography from '@mui/material/Typography';
@@ -6,9 +6,15 @@ import SaveIcon from '@mui/icons-material/Save';
 import ReplyIcon from '@mui/icons-material/Reply';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from 'react';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { ptBR } from 'date-fns/locale';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/pt-br'; // Importa a localização para português do Brasil
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import dayjs from "dayjs";
+
+dayjs.locale('pt-br');
+dayjs.extend(localizedFormat);
 
 export default function EditProfessional() {
     const students = ['Karen Stackoski', 'Fulano da Silva']
@@ -61,15 +67,24 @@ export default function EditProfessional() {
                         ),
                     }}/>}>
                 </Autocomplete>
-                {/* <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
-                    <DatePicker
-                        label="Selecione a data"
-                        value={selectedDate}
-                        onChange={(newValue) => setSelectedDate(newValue)}
-                        inputFormat="dd/MM/yyyy" // Define o formato de digitação
-                        renderInput={(params) => <TextField {...params} />}
+                <Box sx={{padding:'1rem'}}>
+                    
+                    <TextField id="dateAndDays"
+                        label='Data e Hora'
+                        variant="outlined"
+                        select
+                        sx={{width:'30%'}}>
+
+                    </TextField>
+                </Box>
+                <Box sx={{padding:'1rem'}}>
+                    <TextField
+                        id="activities"
+                        label='Atividades'
+                        multiline
+                        sx={{width:'80%'}}
                     />
-                </LocalizationProvider> */}
+                </Box>
             </Box>
         </div>
     );

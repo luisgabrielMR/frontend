@@ -18,7 +18,7 @@ const MenuProps = {
   },
 };
 
-export default function NewProfessional() {
+export default function EditProfessional() {
 
     const apaes = [
         {
@@ -56,7 +56,7 @@ export default function NewProfessional() {
     const [daysWeek, setDaysWeek] = useState([]);
     const [professionalFunction, setProfessionalFunction] = useState('');
 
-    const isDisabled = name === '' || lastName ==='' || cpf === '' || telephoneNumber === '' || cellphoneNumber === '' || unityApae === '' || professionalFunction === '' || daysWeek.length === 0;
+    const isDisabled = name === '' || lastName ==='' || cpf === '' || telephoneNumber === '' || cellphoneNumber === '' || unityApae === '' || professionalFunction === '';
 
     const handleDaysChange = (event) => {
         const {

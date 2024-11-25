@@ -12,6 +12,8 @@ import AddIcon from '@mui/icons-material/Add';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import PhoneIcon from '@mui/icons-material/Phone';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function Professionals() {
     return (
@@ -31,7 +33,7 @@ export default function Professionals() {
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Alunos">
-                            <IconButton aria-label="students" size="large" href="">
+                            <IconButton aria-label="students" size="large" href="../students/students">
                                 <PersonIcon fontSize="inherit" sx={{color:'#000000'}}></PersonIcon>
                             </IconButton>
                         </Tooltip>
@@ -79,14 +81,30 @@ const professionalInfo = (
                         Agendar
                 </Button>
             </Box>
-            <Box>
-                <Box sx={{ display:'flex' }}>
-                    <PhoneAndroidIcon fontSize='small'></PhoneAndroidIcon>
-                    <Typography>(48) 99999-9999</Typography>
+            <Box sx={{display:'flex'}}>
+                <Box>
+                    <Box sx={{ display:'flex' }}>
+                        <PhoneAndroidIcon fontSize='small'></PhoneAndroidIcon>
+                        <Typography>(48) 99999-9999</Typography>
+                    </Box>
+                    <Box sx={{ display:'flex' }}>
+                        <PhoneIcon fontSize='small'></PhoneIcon>
+                        <Typography>(48) 3499-9999</Typography>
+                    </Box>
                 </Box>
-                <Box sx={{ display:'flex' }}>
-                    <PhoneIcon fontSize='small'></PhoneIcon>
-                    <Typography>(48) 3499-9999</Typography>
+                <Box sx={{marginLeft:'auto'}}>
+                    <Box sx={{display:'flex', marginLeft:'auto'}}>
+                        <Tooltip title="Editar">
+                            <IconButton aria-label="menu" size="large" href="./editProfessional/editProfessional">
+                                <EditIcon fontSize="inherit" sx={{color:'#000000'}}></EditIcon>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Excluir">
+                            <IconButton aria-label="menu" size="large" href="">
+                                <DeleteIcon fontSize="inherit" sx={{color:'#000000'}}></DeleteIcon>
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                 </Box>
             </Box>
         </CardContent>
