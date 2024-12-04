@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Box, Button, IconButton, Tooltip } from "@mui/material";
+import { Box, Button, IconButton, TextField, Tooltip } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -15,6 +15,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
 
 export default function Students() {
@@ -139,6 +140,19 @@ export default function Students() {
                     Cadastrar
                 </Button>
             </div>
+            <Box
+                id='searchStudent'
+                sx={{ marginLeft:'1rem', marginRight:'1rem', display:'flex', alignItems:'center' }}
+            >
+                <TextField variant='outlined' label='Pesquisa por Aluno' sx={{width:'95%'}}></TextField>
+                <Tooltip title='Pesquisar'>
+                    <Button 
+                        variant='contained' 
+                        startIcon={<SearchIcon sx={{width:'35px', height:'35px'}}/>} 
+                        sx={{ marginLeft:'auto', width:'50px' }}
+                    />
+                </Tooltip>
+            </Box>
             <Box
                 id='studentsList'
             >
