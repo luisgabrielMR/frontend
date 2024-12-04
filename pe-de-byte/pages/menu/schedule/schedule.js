@@ -9,15 +9,13 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
-import EditCalendarIcon from '@mui/icons-material/EditCalendar';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import PhoneIcon from '@mui/icons-material/Phone';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import EventIcon from '@mui/icons-material/Event';
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import CancelIcon from '@mui/icons-material/Cancel';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
-export default function Professionals() {
+export default function Schedule() {
     return (
         <div>
             <AppBar 
@@ -51,7 +49,7 @@ export default function Professionals() {
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Agendamentos">
-                            <IconButton aria-label="schedule" size="large" href="../schedule/schedule">
+                            <IconButton aria-label="schedule" size="large" href="./schedule">
                                 <EventIcon fontSize="inherit" sx={{color:'#000000'}}></EventIcon>
                             </IconButton>
                         </Tooltip>
@@ -61,7 +59,7 @@ export default function Professionals() {
                             <IconButton 
                                 aria-label="professionals" 
                                 size="large" 
-                                href="./professionals"
+                                href="../professionals/professionals"
                             >
                                 <GroupsIcon 
                                     fontSize="inherit" 
@@ -108,7 +106,7 @@ export default function Professionals() {
                     variant="h5" 
                     gutterBottom
                 >
-                    Profissionais
+                    Agendamentos
                 </Typography>
                 <Button 
                     id="postProfessional" 
@@ -125,7 +123,7 @@ export default function Professionals() {
                 id='searchProfessional'
                 sx={{ marginLeft:'1rem', marginRight:'1rem', display:'flex', alignItems:'center' }}
             >
-                <TextField variant='outlined' label='Pesquisa por Profissional' sx={{width:'95%'}}></TextField>
+                <TextField variant='outlined' label='Pesquisa por Agendamento' sx={{width:'95%'}}></TextField>
                 <Tooltip title='Pesquisar'>
                     <Button 
                         variant='contained' 
@@ -149,9 +147,10 @@ const professionalInfo = (
         <CardContent>
             <Box 
                 sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}
-            >                
+            >
+                <PersonIcon/>                
                 <Typography 
-                    variant='h5' 
+                    variant='h6' 
                     sx={{ fontWeight:'bold' }}
                 >
                     Fulano da Silva
@@ -159,19 +158,16 @@ const professionalInfo = (
                 <Box 
                     sx={{ marginLeft: '10%', display: 'flex', alignItems: 'center', }}
                 >
-                    <Typography>
-                        Especialidade
+                    <GroupsIcon/>
+                    <Typography variant='h6'>
+                        Bertrano da Bicicletinha
                     </Typography>                
                 </Box>
-                <Button 
-                    id="professionalScheduling" 
-                    variant="contained" 
-                    size="large" 
-                    href="./schedulingProfessional/schedulingProfessional" 
-                    startIcon={<EditCalendarIcon />} 
-                    sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
-                        Agendar
-                </Button>
+                <Tooltip title="Cancelar Agendamento">
+                    <IconButton aria-label="menu" size="large" href="" sx={{display:"flex", marginLeft:"auto"}}>
+                        <CancelIcon fontSize="inherit" sx={{color:'#000000'}}></CancelIcon>
+                    </IconButton>
+                </Tooltip>
             </Box>
             <Box 
                 sx={{display:'flex'}}
@@ -180,58 +176,22 @@ const professionalInfo = (
                     <Box 
                         sx={{ display:'flex' }}
                     >
-                        <PhoneAndroidIcon 
+                        <MedicalInformationIcon 
                             fontSize='small'
                         />
                         <Typography>
-                            (48) 99999-9999
+                            Especialidade
                         </Typography>
                     </Box>
                     <Box 
                         sx={{ display:'flex' }}
                     >
-                        <PhoneIcon 
+                        <EventNoteIcon 
                             fontSize='small'
                         />
                         <Typography>
-                            (48) 3499-9999
+                            Horários aqui devem ser separados por vírgula
                         </Typography>
-                    </Box>
-                </Box>
-                <Box 
-                    sx={{marginLeft:'auto'}}
-                >
-                    <Box 
-                        sx={{display:'flex', marginLeft:'auto'}}
-                    >
-                        <Tooltip 
-                            title="Editar"
-                        >
-                            <IconButton 
-                                aria-label="menu" 
-                                size="large" 
-                                href="./editProfessional/editProfessional"
-                            >
-                                <EditIcon 
-                                    fontSize="inherit" 
-                                    sx={{color:'#000000'}}
-                                />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip 
-                            title="Excluir"
-                        >
-                            <IconButton 
-                                aria-label="menu" 
-                                size="large" 
-                                href=""
-                            >
-                                <DeleteIcon 
-                                    fontSize="inherit" 
-                                    sx={{color:'#000000'}}
-                                />
-                            </IconButton>
-                        </Tooltip>
                     </Box>
                 </Box>
             </Box>

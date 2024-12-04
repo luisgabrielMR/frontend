@@ -9,6 +9,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import HomeIcon from '@mui/icons-material/Home';
+import EventIcon from '@mui/icons-material/Event';
 import useAuth from '../hooks/useAuth';
 
 export default function Menu() {
@@ -23,6 +24,11 @@ export default function Menu() {
                         <Tooltip title="Página inicial">
                             <IconButton aria-label="menu" size="large" href="./menu">
                                 <HomeIcon fontSize="inherit" sx={{color:'#000000'}}></HomeIcon>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Agendamentos">
+                            <IconButton aria-label="schedule" size="large" href="./schedule/schedule">
+                                <EventIcon fontSize="inherit" sx={{color:'#000000'}}></EventIcon>
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Profissionais">
@@ -44,10 +50,11 @@ export default function Menu() {
                 </Box>
 			</AppBar>
             <Typography variant="h5" gutterBottom sx={{ margin:'10% 10% 5% 10%' }}>
-				Olá xxxxx! Seja bem-vindo ao menu
+				Olá! Seja bem-vindo ao menu
 			</Typography>
             <Card variant="outlined" sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}>{cardProfessionals}</Card>
             <Card variant='outlined' sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}>{cardStudents}</Card>
+            <Card variant='outlined' sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}>{cardSchedule}</Card>
         </div>
     );
 }
@@ -74,6 +81,21 @@ const cardStudents = (
                 <Typography variant='h5'>Confira os atendimentos pelas agendas dos alunos para planejar suas próximas consultas</Typography>
                 <Tooltip title="Veja os Alunos">
                     <IconButton aria-label="viewStudents" size="large" href="./students/students" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                        <VisibilityIcon fontSize="inherit" sx={{color:'#000000'}}></VisibilityIcon>
+                    </IconButton>
+                </Tooltip>
+            </Box>
+        </CardContent>
+    </React.Fragment>
+);
+
+const cardSchedule = (
+    <React.Fragment>
+        <CardContent>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>                
+                <Typography variant='h5'>Acesse todos os agendamentos marcados para a sua instituição</Typography>
+                <Tooltip title="Veja os Agendamentos">
+                    <IconButton aria-label="viewSchedule" size="large" href="./schedule/schedule" sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
                         <VisibilityIcon fontSize="inherit" sx={{color:'#000000'}}></VisibilityIcon>
                     </IconButton>
                 </Tooltip>

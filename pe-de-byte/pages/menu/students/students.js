@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import SearchIcon from '@mui/icons-material/Search';
+import EventIcon from '@mui/icons-material/Event';
 import { useState } from "react";
 
 export default function Students() {
@@ -72,6 +73,11 @@ export default function Students() {
                                     fontSize="inherit" 
                                     sx={{color:'#000000'}}
                                 />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Agendamentos">
+                            <IconButton aria-label="schedule" size="large" href="../schedule/schedule">
+                                <EventIcon fontSize="inherit" sx={{color:'#000000'}}></EventIcon>
                             </IconButton>
                         </Tooltip>
                         <Tooltip 

@@ -5,11 +5,9 @@ import InputMask from 'react-input-mask';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import SaveIcon from '@mui/icons-material/Save';
 import ReplyIcon from '@mui/icons-material/Reply';
 import PersonIcon from '@mui/icons-material/Person';
 import CancelIcon from '@mui/icons-material/Cancel';
-import GroupsIcon from '@mui/icons-material/Groups';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import { useState } from 'react';
@@ -54,9 +52,6 @@ const scheduleInfo = (
         <CardContent>
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>                
                 <Typography variant='h5' sx={{ fontWeight:'bold' }}>Cicrano da Silva</Typography>
-                <Box sx={{ marginLeft: '10%', display: 'flex', alignItems: 'center', }}>
-                    <Typography>Deficiência</Typography>                
-                </Box>
                 <Tooltip title="Cancelar Agendamento">
                     <IconButton aria-label="menu" size="large" href="" sx={{display:"flex", marginLeft:"auto"}}>
                         <CancelIcon fontSize="inherit" sx={{color:'#000000'}}></CancelIcon>
@@ -65,10 +60,6 @@ const scheduleInfo = (
             </Box>
             <Box sx={{display:'flex'}}>
                 <Box>
-                    <Box sx={{ display:'flex' }}>
-                        <GroupsIcon fontSize='small'></GroupsIcon>
-                        <Typography>Profissional</Typography>
-                    </Box>
                     <Box sx={{ display:'flex' }}>
                         <MedicalInformationIcon fontSize='small'></MedicalInformationIcon>
                         <Typography>Especialidade</Typography>
