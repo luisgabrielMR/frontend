@@ -29,7 +29,7 @@ export default function Home() {
             // Redireciona o usuário para a página inicial
             window.location.href = '/menu/menu';
         } catch (error) {
-            setErrorMessage('Usuário ou senha inválidos' + error);
+            setErrorMessage('Usuário ou senha inválidos');
         }
     };
 

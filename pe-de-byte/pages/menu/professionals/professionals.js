@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, IconButton, Tooltip } from "@mui/material";
+import { Box, Button, IconButton, TextField, Tooltip } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -14,6 +14,7 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import PhoneIcon from '@mui/icons-material/Phone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Professionals() {
     return (
@@ -114,6 +115,19 @@ export default function Professionals() {
                     Cadastrar
                 </Button>
             </div>
+            <Box
+                id='searchProfessional'
+                sx={{ marginLeft:'1rem', marginRight:'1rem', display:'flex', alignItems:'center' }}
+            >
+                <TextField variant='outlined' label='Pesquisa por Profissional' sx={{width:'95%'}}></TextField>
+                <Tooltip title='Pesquisar'>
+                    <Button 
+                        variant='contained' 
+                        startIcon={<SearchIcon sx={{width:'35px', height:'35px'}}/>} 
+                        sx={{ marginLeft:'auto', width:'50px' }}
+                    />
+                </Tooltip>
+            </Box>
             <Card 
                 variant='outlined' 
                     sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}
