@@ -1,6 +1,6 @@
 // import * as React from 'react';
 import { Box, Button, TextField, MenuItem, FormGroup, FormControlLabel, Checkbox, Select, InputLabel, FormControl, OutlinedInput, ListItemText } from "@mui/material";
-import React from 'react';
+import React, { useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import Typography from '@mui/material/Typography';
 import SaveIcon from '@mui/icons-material/Save';
@@ -18,7 +18,7 @@ const MenuProps = {
   },
 };
 
-export default function EditStudent() {
+export default function EditStudent({ studentId }) {
 
     const apaes = [
         {
@@ -62,6 +62,44 @@ export default function EditStudent() {
     const [unityApae, setUnityApae] = useState('');
     const [daysWeek, setDaysWeek] = useState([]);
     const [studentNeed, setstudentNeed] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStudent = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/students/${studentId}`);
+                
+                if (!response.ok) {
+                    // Log para o caso de erro na resposta
+                    const errorText = await response.text();
+                    console.error("Erro na resposta da API:", errorText);
+                    throw new Error(`Erro na API: ${response.statusText}`);
+                }
+    
+                const data = await response.json();
+                
+                // Preenche os estados com os dados recebidos
+                setName(data.name || "");
+                setLastName(data.lastName || "");
+                setCpf(data.cpf || "");
+                setNameParent(data.nameParent || "");
+                setLastNameParent(data.lastNameParent || "");
+                setCpfParent(data.cpfParent || "");
+                setTelephoneNumber(data.telephoneNumber || "");
+                setCellphoneNumber(data.cellphoneNumber || "");
+                setUnityApae(data.unityApae || "");
+                setDaysWeek(data.daysWeek || []);
+                setStudentNeed(data.studentNeed || []);
+            } catch (error) {
+                console.error("Erro ao buscar dados do estudante:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchStudent();
+    }, [studentId]);
+    
 
     const isDisabled = name === '' || 
                        lastName ==='' || 
@@ -94,6 +132,29 @@ export default function EditStudent() {
           typeof value === 'string' ? value.split(',') : value
         );
     };
+
+    const [students, setStudentsEditing] = useState([]);
+
+    useEffect(() => {
+        const fetchStudents = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/students');
+                const data = await response.json();
+                const studentsNecessities = await Promise.all(
+                    data.map(async (student) => {
+                        const necessityResponse = await fetch(`http://localhost:8080/api/students/necessity/${student.id_person}`);
+                        const necessityData = await necessityResponse.json();
+                        return { ...student, necessity: necessityData };
+                    })
+                );
+                setStudentsEditing(studentsNecessities);
+                
+            } catch (error) {
+                console.log('Erro ao buscar lista de alunos: ', error);
+            }
+        };
+        fetchStudents();
+    }, []);
     
     return (
         <div>
@@ -134,6 +195,7 @@ export default function EditStudent() {
                         id='name' 
                         variant='outlined' 
                         label='Nome' 
+                        value={name}
                         sx={{marginRight:'1rem', width:'200px'}} 
                         onChange={(e) => setName(e.target.value)}>
                     </TextField>

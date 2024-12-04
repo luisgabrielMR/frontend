@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { Box, Button, IconButton, Tooltip } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
@@ -15,8 +15,32 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import { useState } from "react";
 
 export default function Students() {
+    const [students, setStudents] = useState([]);
+
+    useEffect(() => {
+        const fetchStudents = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/students');
+                const data = await response.json();
+                const studentsNecessities = await Promise.all(
+                    data.map(async (student) => {
+                        const necessityResponse = await fetch(`http://localhost:8080/api/students/necessity/${student.id_person}`);
+                        const necessityData = await necessityResponse.json();
+                        return { ...student, necessity: necessityData };
+                    })
+                );
+                setStudents(studentsNecessities);
+                
+            } catch (error) {
+                console.log('Erro ao buscar lista de alunos: ', error);
+            }
+        };
+        fetchStudents();
+    }, []);
+
     return (
         <div>
             <AppBar 
@@ -115,117 +139,121 @@ export default function Students() {
                     Cadastrar
                 </Button>
             </div>
-            <Card 
-                variant='outlined' 
-                sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}
+            <Box
+                id='studentsList'
             >
-                {professionalInfo}
-            </Card>
+                {students.map((student, index) => (
+                    <Card 
+                        variant='outlined' 
+                        sx={{ backgroundColor:'#c5ecf8', margin:'10px 10px' }}
+                    >
+                        <CardContent>
+                            <Box 
+                                sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}
+                            >                
+                                <Typography 
+                                    variant='h5' 
+                                    sx={{ fontWeight:'bold' }}
+                                >
+                                    {`${student.first_name} ${student.last_name}`}
+                                </Typography>
+                                <Box 
+                                    sx={{ marginLeft: '10%', display: 'flex', alignItems: 'center', }}
+                                >
+                                    <Typography>
+                                        {student.obs}
+                                    </Typography>                
+                                </Box>
+                                <Button id="studentScheduling" 
+                                    variant="outlined" 
+                                    size="large"
+                                    href="./schedulingStudent/schedulingStudent" 
+                                    startIcon={<EventNoteIcon />} 
+                                    sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}
+                                >
+                                    Agenda
+                                </Button>
+                            </Box>
+                            <Box 
+                                sx={{display:'flex'}}
+                            >
+                                <Box>
+                                    <Box 
+                                        sx={{ display:'flex' }}
+                                    >
+                                        <AccountBoxIcon 
+                                            fontSize='small'
+                                        />
+                                        <Typography>
+                                            {student.responsavel}
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ display:'flex' }}
+                                    >
+                                        <PhoneIcon 
+                                            fontSize='small'
+                                        />
+                                        <Typography>
+                                            {student.celular}
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ display:'flex' }}
+                                    >
+                                        <MedicalInformationIcon 
+                                            fontSize='small'
+                                        />
+                                     
+                                        {student.necessity.map((nec, index) => (
+                                            <Typography key={index} sx={{ marginLeft: '24px' }}>
+                                                {nec.name}, {/* Certifique-se de que está acessando o campo correto da necessidade */}
+                                            </Typography>
+                                        ))}
+                                   
+                                    </Box>
+                                </Box>
+                                <Box 
+                                    sx={{marginLeft:'auto'}}
+                                >
+                                    <Box 
+                                        sx={{display:'flex', marginLeft:'auto'}}
+                                    >
+                                        <Tooltip 
+                                            title="Editar"
+                                        >
+                                            <IconButton 
+                                                aria-label="menu" 
+                                                size="large" 
+                                                href={`./editStudent/editStudent/${student.id}`}
+                                            >
+                                                <EditIcon 
+                                                    fontSize="inherit" 
+                                                    sx={{color:'#000000'}}
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Tooltip 
+                                            title="Excluir"
+                                        >
+                                            <IconButton 
+                                                aria-label="menu" 
+                                                size="large"
+                                                href=""
+                                            >
+                                                <DeleteIcon 
+                                                    fontSize="inherit" 
+                                                    sx={{color:'#000000'}}
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
         </div>
     );
 }
-
-const professionalInfo = (
-    <React.Fragment>
-        <CardContent>
-            <Box 
-                sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}
-            >                
-                <Typography 
-                    variant='h5' 
-                    sx={{ fontWeight:'bold' }}
-                >
-                    Cicrano da Silva
-                </Typography>
-                <Box 
-                    sx={{ marginLeft: '10%', display: 'flex', alignItems: 'center', }}
-                >
-                    <Typography>
-                        Deficiência
-                    </Typography>                
-                </Box>
-                <Button id="studentScheduling" 
-                    variant="outlined" 
-                    size="large"
-                    href="./schedulingStudent/schedulingStudent" 
-                    startIcon={<EventNoteIcon />} 
-                    sx={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}
-                >
-                    Agenda
-                </Button>
-            </Box>
-            <Box 
-                sx={{display:'flex'}}
-            >
-                <Box>
-                    <Box 
-                        sx={{ display:'flex' }}
-                    >
-                        <AccountBoxIcon 
-                            fontSize='small'
-                        />
-                        <Typography>
-                            Responsável
-                        </Typography>
-                    </Box>
-                    <Box 
-                        sx={{ display:'flex' }}
-                    >
-                        <PhoneIcon 
-                            fontSize='small'
-                        />
-                        <Typography>
-                            (48) 3499-9999
-                        </Typography>
-                    </Box>
-                    <Box 
-                        sx={{ display:'flex' }}
-                    >
-                        <MedicalInformationIcon 
-                            fontSize='small'
-                        />
-                        <Typography>
-                            Necessidades
-                        </Typography>
-                    </Box>
-                </Box>
-                <Box 
-                    sx={{marginLeft:'auto'}}
-                >
-                    <Box 
-                        sx={{display:'flex', marginLeft:'auto'}}
-                    >
-                        <Tooltip 
-                            title="Editar"
-                        >
-                            <IconButton 
-                                aria-label="menu" 
-                                size="large" 
-                                href="./editStudent/editStudent"
-                            >
-                                <EditIcon 
-                                    fontSize="inherit" 
-                                    sx={{color:'#000000'}}
-                                />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip 
-                            title="Excluir"
-                        >
-                            <IconButton 
-                                aria-label="menu" 
-                                size="large"
-                                href=""
-                            >
-                                <DeleteIcon 
-                                    fontSize="inherit" 
-                                    sx={{color:'#000000'}}
-                                />
-                            </IconButton>
-                        </Tooltip>
-                    </Box>
-                </Box>
-            </Box>
-        </CardContent>
-    </React.Fragment>
-);
