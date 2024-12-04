@@ -32,6 +32,13 @@ export default function NewProfessional() {
         { value: '5', label: 'Sexta-feira 08:00' },
     ];
 
+    const specialities = [
+        { value: '1', label: 'Fonoaudiólogo' },
+        { value: '2', label: 'Psicólogo' },
+        { value: '3', label: 'Fisioterapeuta' },
+        { value: '4', label: 'Terapeuta Ocupacional' },
+    ];
+
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [cpf, setCpf] = useState('');
@@ -39,7 +46,7 @@ export default function NewProfessional() {
     const [cellphoneNumber, setCellphoneNumber] = useState('');
     const [unityApae, setUnityApae] = useState('');
     const [daysWeek, setDaysWeek] = useState([]);
-    const [professionalFunction, setProfessionalFunction] = useState('');
+    const [specialityId, setSpecialityId] = useState('');
     const [observations, setObservations] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -51,7 +58,7 @@ export default function NewProfessional() {
         telephoneNumber === '' ||
         cellphoneNumber === '' ||
         unityApae === '' ||
-        professionalFunction === '' ||
+        specialityId === '' ||
         daysWeek.length === 0;
 
     const handleDaysChange = (event) => {
@@ -69,7 +76,7 @@ export default function NewProfessional() {
             cpf,
             celular: cellphoneNumber,
             telephoneNumber, // Não está no exemplo do Postman, mas pode ser incluído se for necessário
-            specialityId: professionalFunction, // Verifique se a especialidade corresponde ao backend
+            specialityId, // Enviando o ID da especialidade
             AvailableHoursId: daysWeek, // IDs dos horários disponíveis
             obs: observations,
         };
@@ -212,12 +219,19 @@ export default function NewProfessional() {
                         ))}
                     </TextField>
                     <TextField
-                        id="professionalFunction"
+                        select
+                        id="specialityId"
                         variant="outlined"
-                        label="Especialidade (ID)"
-                        sx={{ marginRight: '1rem' }}
-                        onChange={(e) => setProfessionalFunction(e.target.value)}
-                    />
+                        label="Especialidade"
+                        sx={{ width: '400px' }}
+                        onChange={(e) => setSpecialityId(e.target.value)}
+                    >
+                        {specialities.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </Box>
 
                 <Typography sx={{ marginLeft: '1rem' }}>
