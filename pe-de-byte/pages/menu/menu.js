@@ -9,8 +9,11 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import HomeIcon from '@mui/icons-material/Home';
+import useAuth from '../hooks/useAuth';
 
 export default function Menu() {
+
+    useAuth();
     return (
         <div>
             <AppBar sx={{ height: '17%',  backgroundColor: '#61c7e7' }}>
